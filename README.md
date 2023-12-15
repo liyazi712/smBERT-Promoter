@@ -36,15 +36,13 @@ python3 -m pip install -r requirements.txt
 
 [DNABERT6](https://drive.google.com/file/d/1BJjqb5Dl2lNMg2warsFQ0-Xvn1xxfFXC/view?usp=sharing)
 
-Download the pre-trained model in to a directory. (If you would like to replicate the following examples, please download DNABERT 6). Then unzip the package by running:
-
-```
-unzip 6-new-12w-0.zip
-```
 
 ### 3 Fine-tune with pre-trained model
-### 3.1 Finetune command (KMER=3,4,5,6)
+"promoter2non_promoter" refers to the first stage, while "strong2weak_promoter" 
+refers to the second stage. Please make the necessary changes accordingly.
+### 3.1 Finetune command (change KMER=3,4,5,6)
 
+```
 export KMER=3
 export MODEL_PATH=./ft/promoter2non_promoter/$KMER
 export DATA_PATH=sample_data/ft/promoter2non_promoter/$KMER
@@ -71,9 +69,10 @@ python run_finetune.py \
     --overwrite_output \
     --weight_decay 0.01 \
     --n_process 8
+```
+### 3.2 Predict command (change KMER=3,4,5,6)
 
-### 3.2 Predict command (KMER=3,4,5,6)
-
+```
 export KMER=5
 export MODEL_PATH=./ft/promoter2non_promoter/$KMER
 export DATA_PATH=sample_data/ft/promoter2non_promoter/$KMER
@@ -91,9 +90,10 @@ python run_finetune.py \
     --output_dir $MODEL_PATH \
     --predict_dir $PREDICTION_PATH \
     --n_process 48
-
+```
 ### 3.3 Ensemble predict command
 
+```
 export MODEL_PATH=./ft/promoter2non_promoter/
 export DATA_PATH=sample_data/ft/promoter2non_promoter/
 export PREDICTION_PATH=./result/promoter2non_promoter/
@@ -110,3 +110,4 @@ python run_finetune.py \
     --output_dir $MODEL_PATH \
     --result_dir $PREDICTION_PATH \
     --n_process 48
+```
